@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ExercicioResolvidoAula101.Entities.Enums;
-using System.Collections.Generic;
 
 namespace ExercicioResolvidoAula101.Entities
 {
@@ -15,7 +13,7 @@ namespace ExercicioResolvidoAula101.Entities
         public WorkerLevel Level { get; set; }
         public double BaseSalary { get; set; }
         public Department Department { get; set; }
-        public List<HourContract> listaContratos { get; set; } = new List<HourContract>();
+        public List<HourContract> ListaContratos { get; set; } = new List<HourContract>();
 
         public Worker()
         {
@@ -31,21 +29,26 @@ namespace ExercicioResolvidoAula101.Entities
 
         public void AddContract(HourContract addCont)
         {
-            listaContratos.Add(addCont);
+            ListaContratos.Add(addCont);
         }
 
         public void RemoveContract(HourContract remCont)
         {
-            listaContratos.Remove(remCont);
+            ListaContratos.Remove(remCont);
         }
 
         public double Recebido(int year, int month)
         {
-            foreach (HourContract h in listaContratos)
+            double soma = 0.0;
+
+            foreach (HourContract h in ListaContratos)
             {
-
+                if (h.Date.Year == year && h.Date.Month == month)
+                {
+                    soma += h.TotalValue();
+                }
             }
+            return soma;
         }
-
     }
 }

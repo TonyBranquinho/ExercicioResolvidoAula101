@@ -14,7 +14,7 @@ namespace ExercicioResolvidoAula101.Entities
         {
         }
 
-        public Department(string DepName)
+        public Department(string depName)
         {
             DepName = depName;
         }

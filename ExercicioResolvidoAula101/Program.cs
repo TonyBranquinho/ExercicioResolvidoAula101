@@ -34,9 +34,12 @@ namespace MyApp
             Console.Write("Quantos contratos para este trabalhador?");
             int addCont = int.Parse(Console.ReadLine());
 
+            // CRIA UM OBJETO TRABALHADOR
             Worker trab = new Worker(name, level, baseSalary, departamento);
 
 
+
+            // CADASTRA OS DADOS EM CADA UM DOS CONTRATOS
             for (int i = 0; i < addCont; i++)
             {
                 Console.WriteLine("INSIRA OS DADOS DO #" + i + "CONTRATO:");
@@ -48,7 +51,7 @@ namespace MyApp
                 int hours = int.Parse(Console.ReadLine());
 
                 HourContract contrato = new HourContract(date, valuePerHour, hours);
-                addCont = int.Parse(Console.ReadLine());
+                trab.AddContract(contrato);
             }
 
 
@@ -61,23 +64,21 @@ namespace MyApp
 
             DateTime periodo;
 
-            bool conversaoValida2 = DateTime.TryParse(entrada2, out periodo);
+            // TENTA CONVERTER A STRING EM DATA.
+            bool conversaoValida2 = DateTime.TryParse("01/" + entrada2, out periodo);
+
+            int month = periodo.Month;
+            int year = periodo.Year;
 
 
 
 
 
 
-            HourContract listaContratos = new HourContract();
 
-            foreach (HourContract p in listaContratos)
-            {
-                Console.Write("NOME: " + p.Name );
-                Console.Write("DEPARTAMENTO: " + p.Department);
-                Console.Write("QUANTIA RECEBIDA EM " + periodo + ": " + Recebido());
-            }
-
-
+            Console.Write("NOME: " + trab.Name);
+            Console.Write("DEPARTAMENTO: " + trab.Department);
+            Console.Write("QUANTIA RECEBIDA EM " + entrada2 + ": " + trab.Recebido(year, month));
         }
     }
 }
